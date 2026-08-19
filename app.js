@@ -14,8 +14,9 @@ async function loadScenario(id) {
   kit.innerHTML = scenario.kit.map(item => `<li>${item}</li>`).join('');
   training.innerHTML = scenario.training.map(item => `<li>${item}</li>`).join('');
   tabs.forEach(tab => tab.classList.toggle('selected', tab.dataset.scenario === id));
+  localStorage.setItem('safety-guide.scenario', id);
 }
 
 tabs.forEach(tab => tab.addEventListener('click', () => loadScenario(tab.dataset.scenario)));
 document.querySelector('#print').addEventListener('click', () => window.print());
-loadScenario('home');
+loadScenario(localStorage.getItem('safety-guide.scenario') || 'home');
